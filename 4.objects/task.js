@@ -1,21 +1,14 @@
-
 function Student(name, gender, age) {
   this.name = name;
   this.gender = gender;
   this.age = age;
-  
-  //let student1 = new Student("Ivan", "male", 22);
-  //let student2 = new Student("Masha", "female", 21);
-  //let student3 = new Student("Dima", "male", 23);
-  //let student4 = new Student("Dasha", "female", 20);
 }
 
 Student.prototype.setSubject = function (subjectName) {
-  this.subjectName = subjectName;
+  this.subject = subjectName;
 }
 
 Student.prototype.addMark = function (mark) {
-  this.mark = mark;
 
   if(this.marks === undefined){ 
     this.marks = [mark];
@@ -24,18 +17,20 @@ Student.prototype.addMark = function (mark) {
   }
 }
 
-Student.prototype.addMarks = function (mark1,mark2,mark3, ...other) {
-  this.subjectName = subjectName;
+Student.prototype.addMarks = function (...marks) {
+  
   if (this.marks === undefined) {
-    this.marks = [mark1,mark2,mark3, ...other];
+    this.marks = [...marks];
   } else {
-    this.marks.push(mark1,mark2,mark3, ...other);
+    this.marks.push(...marks);
   }
-};
+}
 
-//Student.prototype.getAverage = function () {
-  //this.marks / addMarks = ;
-//}
+Student.prototype.getAverage = function() {
+  let sum = 0;
+  this.marks.forEach((mark) => (sum += parseInt(mark)));
+  return sum / this.marks.length;
+}
 
 Student.prototype.exclude = function (reason) {
   delete this.subject;
