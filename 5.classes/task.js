@@ -9,7 +9,7 @@ class PrintEditionItem {
 	}
     
     fix(){
-		this.state.push(state *= 1.5);
+		this.state *= 1.5;
     }
     
     set state(state) {
@@ -75,9 +75,15 @@ class Library {
         }
     }
     findBookBy(type, value){
-
+        let key = this.books.find((book) => book[type] === value);
+        return typeof key === "object" ? key : null;
     }
-    giveBookByName(bookName){
 
+    giveBookByName(bookName){
+        let lookForABook = this.books.find((book) => book.name === bookName);
+        if (typeof lookForABook === "object") {
+            this.books.splice(this.books.indexOf(lookForABook), 1);
+            return lookForABook;
+        } else return null;
     }
 }    
